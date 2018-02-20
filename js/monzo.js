@@ -1,16 +1,21 @@
-const clientId = 'oauthclient_00009TXCnYQLZeF8s0rvbF';
-const redirectUri = 'https://rossmuego.github.io/dashbonzo/js/monzo.js'
+var AccessToken;
 
 function auth() {
 
   var theUrl = "https://api.monzo.com/accounts";
-  var code = document.getElementById('access-token-input').value;
+  AccessToken = prompt("Enter Access Token");
+
   var xmlHttp = new XMLHttpRequest();
 
   xmlHttp.open("GET", theUrl, false); // false for synchronous request
-  xmlHttp.setRequestHeader('Authorization', 'Bearer ' + code)
+  xmlHttp.setRequestHeader('Authorization', 'Bearer ' + AccessToken)
 
   xmlHttp.send(null);
-  console.log(JSON.parse(xmlHttp.responseText));
+  var response = JSON.parse(xmlHttp.responseText);
+
+  document.getElementById('sort-code').innerHTML = response.accounts[0].sort_code;
+  document.getElementById('account-name').innerHTML = response.accounts[0].description;
+  document.getElementById('account-number').innerHTML = response.accounts[0].account_number;
+
 
 }

@@ -13,11 +13,12 @@
   <title>Dashbonzo</title>
 </head>
 
-<body>
+<body onload="auth()">
   <div class="square">
     <h1>Account Overview</h1>
-    <input type="text" id="access-token-input">
-    <button onclick="auth()">Authorise</button>
+    <div id="account-name"></div>
+    <div id="sort-code"></div>
+    <div id="account-number"></div>
   </div>
   <div class="square">
     <h1>Transactions</h1>
