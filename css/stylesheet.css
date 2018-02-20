@@ -17,6 +17,7 @@ h1, h3 {
   float: left;
   height: 500px;
   text-align: center;
+  overflow: scroll;
 }
 
 #map {
