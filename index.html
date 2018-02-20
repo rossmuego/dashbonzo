@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <script type="text/javascript" src="js/maps.js"></script>
+  <script type="text/javascript" src="js/monzo.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy5IvCQwH0V750a4qar7BMIJLAEBtAYZ8&callback=initMap"></script>
+  <title>Dashbonzo</title>
+</head>
+
+<body>
+  <div class="square">
+    <h1>Account Overview</h1>
+    <button onclick="auth()">Authorise</button>
+  </div>
+  <div class="square">
+    <h1>Transactions</h1>
+  </div>
+  <div class="square">
+    <h1>Breakdown</h1>
+  </div>
+  <div class="square">
+    <div id="map"></div>
+  </div>
+</body>
+
+</html>
