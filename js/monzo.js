@@ -16,6 +16,6 @@ function auth() {
   document.getElementById('sort-code').innerHTML = response.accounts[0].sort_code;
   document.getElementById('account-name').innerHTML = response.accounts[0].description;
   document.getElementById('account-number').innerHTML = response.accounts[0].account_number;
-
+  console.log(JSON.parse(xmlHttp.responseText))
 
 }
