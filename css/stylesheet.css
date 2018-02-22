@@ -1,5 +1,3 @@
-
-
 html, body {
   margin: 0;
   padding: 0;
@@ -41,6 +39,32 @@ h3 {
   border-radius: 5px;
   height: 30px;
   margin: 1px;
+  height: 40px;
+  background-color: green;
+}
+
+.transaction-in {}
+
+.transaction-out {}
+
+.transaction-image {
+  height: 40px;
+  float: left;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.transaction-merch-name {
+  float: left;
+  font-size: 20px;
+  line-height: 200%;
+}
+
+.transaction-price{
+  float: right;
+  font-size: 20px;
+  line-height: 200%;
+  margin-right: 5px;
 }
 
 .transaction-left {

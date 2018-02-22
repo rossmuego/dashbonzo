@@ -7,6 +7,7 @@ function init() {
   var accounts = getAccounts();
   var transactions = getTransactions(accounts);
   var balance = getBalance(accounts);
+  console.log(transactions)
 
   document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
 
@@ -14,8 +15,10 @@ function init() {
 
     if (transactions.transactions[i].merchant == null) {
       merch = "N/A"
+      image = ""
     } else {
       merch = transactions.transactions[i].merchant.name;
+      image = transactions.transactions[i].merchant.logo;
     }
 
     var singleTrans = document.createElement('div')
@@ -27,13 +30,12 @@ function init() {
     } else {
       singleTrans.style.backgroundColor = "green";
     }
-    singleTrans.innerHTML = transactions.transactions[i].amount / 100 + '       ' + merch
+    singleTrans.innerHTML = "<div><img class="+'transaction-image'+" src="+image+" alt="+'trans_img'+"><div class="+'transaction-merch-name'+">"+merch+"</div><div class="+'transaction-price>'+transactions.transactions[i].amount/100+"</div></div>"
     document.getElementById('transactions-all').appendChild(singleTrans);
   }
 
   var today = new Date(Date.now()).toISOString();
   today = today.slice(0, 10);
-  console.log(today)
 
   for (var i = transactions.transactions.length - 1; i >= 0; i--) {
 
@@ -42,6 +44,7 @@ function init() {
         merch = "N/A"
       } else {
         merch = transactions.transactions[i].merchant.name;
+        image = transactions.transactions[i].merchant.logo;
       }
 
       var singleTrans = document.createElement('div')
@@ -53,7 +56,7 @@ function init() {
       } else {
         singleTrans.style.backgroundColor = "green";
       }
-      singleTrans.innerHTML = transactions.transactions[i].amount / 100 + '       ' + merch
+      singleTrans.innerHTML = "<div><img class="+'transaction-image'+" src="+image+" alt="+'trans_img'+"><div class="+'transaction-merch-name'+">"+merch+"</div><div class="+'transaction-price>'+transactions.transactions[i].amount/100+"</div></div>"
       document.getElementById('transactions-today').appendChild(singleTrans);
     }
   }
