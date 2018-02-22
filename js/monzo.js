@@ -10,7 +10,7 @@ function init() {
 
   document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
 
-  for (var i = 0; i < transactions.transactions.length; i++) {
+  for (var i = transactions.transactions.length - 1; i > 0; i--) {
 
     if (transactions.transactions[i].merchant == null) {
       merch = "Not Merchant"
