@@ -6,7 +6,6 @@ function init() {
   var accounts = getAccounts();
   var transactions = getTransactions(accounts);
   var balance = getBalance(accounts);
-
   document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
 
   for (var i = transactions.transactions.length - 1; i >= 0; i--) {
@@ -16,14 +15,13 @@ function init() {
         for (var j = 0; j < pots.pots.length; j++) {
           if (pots.pots[j].id == transactions.transactions[i].description) {
             merch = pots.pots[j].name
-            image = ""
+            image = "img/bag-money.jpg"
           }
         }
       } else {
         merch = transactions.transactions[i].description;
-        image = ""
+        image = "img/default-avatar.png"
       }
-
     } else {
       merch = transactions.transactions[i].merchant.name;
       image = transactions.transactions[i].merchant.logo;
