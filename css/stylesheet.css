@@ -25,3 +25,9 @@ h1, h3 {
   height: 100%;
   background-color: grey;
 }
+
+.transaction {
+  border-radius: 5px;
+  height: 30px;
+  margin: 1px;
+}
