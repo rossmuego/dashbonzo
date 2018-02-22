@@ -49,6 +49,7 @@ h3 {
 
 .transaction-image {
   height: 40px;
+  width: 40px;
   float: left;
   margin-right: 5px;
   border-radius: 5px;

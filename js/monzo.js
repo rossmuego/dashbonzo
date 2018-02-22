@@ -3,19 +3,27 @@ var AccessToken;
 function init() {
 
   AccessToken = prompt("Enter Access Token");
-
   var accounts = getAccounts();
   var transactions = getTransactions(accounts);
   var balance = getBalance(accounts);
-  console.log(transactions)
 
   document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
 
   for (var i = transactions.transactions.length - 1; i >= 0; i--) {
-
     if (transactions.transactions[i].merchant == null) {
-      merch = "N/A"
-      image = ""
+      if ((transactions.transactions[i].description.slice(0, 4)) == "pot_") {
+        var pots = getPots()
+        for (var j = 0; j < pots.pots.length; j++) {
+          if (pots.pots[j].id == transactions.transactions[i].description) {
+            merch = pots.pots[j].name
+            image = ""
+          }
+        }
+      } else {
+        merch = transactions.transactions[i].description;
+        image = ""
+      }
+
     } else {
       merch = transactions.transactions[i].merchant.name;
       image = transactions.transactions[i].merchant.logo;
@@ -30,7 +38,7 @@ function init() {
     } else {
       singleTrans.style.backgroundColor = "green";
     }
-    singleTrans.innerHTML = "<div><img class="+'transaction-image'+" src="+image+" alt="+'trans_img'+"><div class="+'transaction-merch-name'+">"+merch+"</div><div class="+'transaction-price>'+transactions.transactions[i].amount/100+"</div></div>"
+    singleTrans.innerHTML = "<div><img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>' + transactions.transactions[i].amount / 100 + "</div></div>"
     document.getElementById('transactions-all').appendChild(singleTrans);
   }
 
@@ -38,7 +46,6 @@ function init() {
   today = today.slice(0, 10);
 
   for (var i = transactions.transactions.length - 1; i >= 0; i--) {
-
     if (transactions.transactions[i].created.slice(0, 10) == today) {
       if (transactions.transactions[i].merchant == null) {
         merch = "N/A"
@@ -56,7 +63,7 @@ function init() {
       } else {
         singleTrans.style.backgroundColor = "green";
       }
-      singleTrans.innerHTML = "<div><img class="+'transaction-image'+" src="+image+" alt="+'trans_img'+"><div class="+'transaction-merch-name'+">"+merch+"</div><div class="+'transaction-price>'+transactions.transactions[i].amount/100+"</div></div>"
+      singleTrans.innerHTML = "<div><img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>' + transactions.transactions[i].amount / 100 + "</div></div>"
       document.getElementById('transactions-today').appendChild(singleTrans);
     }
   }
@@ -84,6 +91,11 @@ function getBalance(accNum) {
   return makeRequest("GET", "balance?account_id=", accNum.accounts[0].id);
 }
 
+function getPots() {
+
+  return makeRequest("GET", "pots/listV1", "")
+
+}
 
 function makeRequest(type, action, param) {
 
