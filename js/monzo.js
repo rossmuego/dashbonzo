@@ -8,10 +8,9 @@ function init() {
   var transactions = getTransactions(accounts);
   var balance = getBalance(accounts);
 
-  console.log(transactions);
   document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
 
-  for (var i = transactions.transactions.length - 1; i > 0; i--) {
+  for (var i = transactions.transactions.length - 1; i >= 0; i--) {
 
     if (transactions.transactions[i].merchant == null) {
       merch = "N/A"
@@ -36,10 +35,9 @@ function init() {
   today = today.slice(0, 10);
   console.log(today)
 
-  for (var i = transactions.transactions.length - 1; i > 0; i--) {
+  for (var i = transactions.transactions.length - 1; i >= 0; i--) {
 
-    if (transactions.transactions[i].created.slice(0,10) == today) {
-
+    if (transactions.transactions[i].created.slice(0, 10) == today) {
       if (transactions.transactions[i].merchant == null) {
         merch = "N/A"
       } else {
