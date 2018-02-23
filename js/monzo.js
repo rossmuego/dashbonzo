@@ -1,8 +1,6 @@
-var AccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE1MTk1NjgzMDksImlhdCI6MTUxOTM5NTUwOSwianRpIjoidG9rXzAwMDA5VHZVMXh6Umc2azF4YkJYNm4iLCJ1aSI6InVzZXJfMDAwMDlUUTRFa2hGbkZCQ3pWMlhOaCIsInYiOiIyIn0.VGo7Dde6YdkkiwCAShWkL_1yV6kGNEdKoiI6quzq8i4"
-
 function init() {
 
-//  AccessToken = prompt("Enter Access Token");
+  AccessToken = prompt("Enter Access Token");
   var accounts = getAccounts();
   var transactions = getTransactions(accounts);
   var balance = getBalance(accounts);
@@ -86,6 +84,7 @@ function displayAllTrans(allTransactions) {
     } else {
       singleTrans.style.backgroundColor = "green";
     }
+
     singleTrans.innerHTML = "<div><img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>' + allTransactions.transactions[i].amount / 100 + "</div></div>"
     document.getElementById('transactions-all').appendChild(singleTrans);
 

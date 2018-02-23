@@ -8,7 +8,7 @@ function loadChart(allTrans) {
       transData.push(0)
     }
     if (categories.indexOf(allTrans.transactions[i].category) != -1) {
-      var value = allTrans.transactions[i].amount
+      var value = (allTrans.transactions[i].amount).toFixed(2)
       if (value < 0) {
         value *= -1;
         transData[categories.indexOf(allTrans.transactions[i].category)] += (value / 100)
@@ -33,8 +33,6 @@ function loadChart(allTrans) {
           'Purple'
         ]
       }],
-
-      // These labels appear in the legend and in the tooltips when hovering different arcs
       labels: categories
     }
   });
