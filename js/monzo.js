@@ -1,11 +1,16 @@
+var AccessToken;
+
 function init() {
 
   AccessToken = prompt("Enter Access Token");
   var accounts = getAccounts();
   var transactions = getTransactions(accounts);
   var balance = getBalance(accounts);
-  loadChart(transactions)
+  loadChartData(transactions, "pie");
   displayAllTrans(transactions)
+  initMap(transactions)
+
+  console.log(transactions)
 
   document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
 }
@@ -80,12 +85,18 @@ function displayAllTrans(allTransactions) {
     singleTrans.className = "transaction";
 
     if (parseInt((allTransactions.transactions[i].amount)) < 0) {
-      singleTrans.style.backgroundColor = "rgb(210,86,98)";
+      singleTrans.style.backgroundColor = "#F44336";
     } else {
-      singleTrans.style.backgroundColor = "green";
+      singleTrans.style.backgroundColor = "#4CAF50";
     }
 
-    singleTrans.innerHTML = "<div><img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>' + allTransactions.transactions[i].amount / 100 + "</div></div>"
+    if (allTransactions.transactions[i].amount < 0) {
+      value = allTransactions.transactions[i].amount * -1
+    } else {
+      value = allTransactions.transactions[i].amount
+    }
+
+    singleTrans.innerHTML = "<div><img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>£' + value / 100 + "</div></div>"
     document.getElementById('transactions-all').appendChild(singleTrans);
 
     if (allTransactions.transactions[i].created.slice(0, 10) == today) {
