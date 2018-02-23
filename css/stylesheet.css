@@ -37,10 +37,17 @@ h3 {
 
 .transaction {
   border-radius: 5px;
-  height: 30px;
   margin: 1px;
   height: 40px;
-  background-color: green;
+  -webkit-transition: height 0.5s;
+  /* For Safari 3.1 to 6.0 */
+  transition: height 0.5s;
+}
+
+.transaction-extended {
+  border-radius: 5px;
+  margin: 1px;
+  height: 40px;
 }
 
 .transaction-panel-header {
@@ -50,6 +57,17 @@ h3 {
 .transaction-image {
   height: 40px;
   width: 40px;
+  float: left;
+  margin-right: 5px;
+  border-radius: 5px;
+  -webkit-transition: width 0.5s, height 0.5s;
+  /* For Safari 3.1 to 6.0 */
+  transition: width 0.5s, height 0.5s;
+}
+
+.transaction-image-large {
+  height: 80px;
+  width: 80px;
   float: left;
   margin-right: 5px;
   border-radius: 5px;
@@ -75,13 +93,13 @@ h3 {
   height: 80%;
 }
 
-.transaction-container-left{
+.transaction-container-left {
   float: left;
   width: 50%;
   height: 100%;
 }
 
-.transaction-container-right{
+.transaction-container-right {
   float: right;
   width: 50%;
   height: 100%;

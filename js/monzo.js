@@ -2,17 +2,19 @@ var AccessToken;
 
 function init() {
 
-  AccessToken = prompt("Enter Access Token");
-  var accounts = getAccounts();
-  var transactions = getTransactions(accounts);
-  var balance = getBalance(accounts);
-  loadChartData(transactions, "pie");
-  displayAllTrans(transactions)
-  initMap(transactions)
-
-  console.log(transactions)
-
-  document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
+  try {
+    AccessToken = prompt("Enter Access Token");
+    var accounts = getAccounts();
+    var transactions = getTransactions(accounts);
+    var balance = getBalance(accounts);
+    loadChartData(transactions, "pie");
+    displayAllTrans(transactions)
+    initMap(transactions)
+    document.getElementById('account-balance').innerHTML = "£" + balance.balance / 100;
+  } catch (e) {
+    alert("Invalid Token")
+    location.reload();
+  }
 }
 
 function getTransactions(accNum) {
@@ -57,7 +59,7 @@ function displayAllTrans(allTransactions) {
   var today = new Date(Date.now()).toISOString();
   today = today.slice(0, 10);
 
-  for (var i = allTransactions.transactions.length - 1; i >= 0; i--) {
+  for (var i = allTransactions.transactions.length - 1; i > 30; i--) {
     if (allTransactions.transactions[i].merchant == null) {
       if ((allTransactions.transactions[i].description.slice(0, 4)) == "pot_") {
         var pots = getPots()
@@ -96,11 +98,23 @@ function displayAllTrans(allTransactions) {
       value = allTransactions.transactions[i].amount
     }
 
-    singleTrans.innerHTML = "<div><img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>£' + value / 100 + "</div></div>"
+    singleTrans.innerHTML = "<img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>£' + value / 100 + "</div>"
     document.getElementById('transactions-all').appendChild(singleTrans);
 
     if (allTransactions.transactions[i].created.slice(0, 10) == today) {
       document.getElementById('transactions-today').appendChild(singleTrans);
     }
   }
+}
+
+function expandTransaction(clicked_id) {
+
+  var divheight = document.getElementById(clicked_id).clientHeight
+
+  if (divheight == 80) {
+    document.getElementById(clicked_id).style.height = "40px";
+  } else if (divheight == 40) {
+    document.getElementById(clicked_id).style.height = "80px";
+  }
+
 }

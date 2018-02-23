@@ -1,7 +1,7 @@
 function initMap(allTrans) {
   var points = [];
-  var currLat = 51.528801
-  var currLon = -0.093241
+  var currLat = 54.635697
+  var currLon = -3.515625
 
   for (var i = 0; i < allTrans.transactions.length; i++) {
     if (allTrans.transactions[i].merchant != null) {
@@ -13,8 +13,8 @@ function initMap(allTrans) {
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: currLocation,
-    zoom: 13,
-    mapTypeId: 'satellite'
+    zoom: 5,
+    mapTypeId: 'hybrid'
   });
 
   var heatmap = new google.maps.visualization.HeatmapLayer({

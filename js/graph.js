@@ -21,7 +21,7 @@ function loadChartData(allTrans, type) {
 
 function generateGraph(type, labels, graphData) {
   var config = {
-    type: 'pie',
+    type: type,
     data: {
       datasets: [{
         data: graphData,
@@ -36,7 +36,7 @@ function generateGraph(type, labels, graphData) {
           '#FFEB3B',
 
         ],
-        label: 'Dataset 1'
+        label: 'Amount: '
       }],
       labels: labels
     },
