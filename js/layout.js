@@ -3,7 +3,6 @@ function init() {
     AccessToken = prompt("Enter Access Token");
     var accounts = getAccounts();
     var transactions = getTransactions(accounts);
-    console.log(transactions)
     loadChartData(transactions, "pie");
     displayAllTrans(transactions)
     initMap(transactions)
@@ -46,11 +45,11 @@ function displayAllTrans(allTransactions) {
     singleTrans.id = allTransactions.transactions[i].id
     singleTrans.className = "transaction";
 
-    if (parseInt((allTransactions.transactions[i].amount)) < 0) {
-      singleTrans.style.backgroundColor = "#F44336";
-    } else {
-      singleTrans.style.backgroundColor = "#4CAF50";
-    }
+      if (parseInt((allTransactions.transactions[i].amount)) < 0) {
+        singleTrans.style.backgroundColor = "#F44336";
+      } else {
+        singleTrans.style.backgroundColor = "#4CAF50";
+      }
 
     if (allTransactions.transactions[i].amount < 0) {
       value = allTransactions.transactions[i].amount * -1

@@ -42,6 +42,7 @@ h3 {
   -webkit-transition: height 0.5s;
   /* For Safari 3.1 to 6.0 */
   transition: height 0.5s;
+  width: 100%;
 }
 
 .transaction-extended {
@@ -55,8 +56,7 @@ h3 {
 }
 
 .transaction-image {
-  height: 40px;
-  width: 40px;
+  height: 100%;
   float: left;
   margin-right: 5px;
   border-radius: 5px;
@@ -77,10 +77,12 @@ h3 {
   float: left;
   font-size: 20px;
   line-height: 200%;
+  width: 60%;
 }
 
 .transaction-price {
   float: right;
+  width: 20%;
   font-size: 20px;
   line-height: 200%;
   margin-right: 5px;
