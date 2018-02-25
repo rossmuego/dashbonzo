@@ -1,6 +1,12 @@
+var categories = [];
+var transData = [];
+
+function changeType(graphType) {
+  window.myPie.destroy();
+  generateGraph(graphType, categories, transData)
+}
+
 function loadChartData(allTrans, type) {
-  var categories = [];
-  var transData = [];
 
   for (var i = 0; i < allTrans.transactions.length; i++) {
     if (categories.indexOf(allTrans.transactions[i].category) == -1 && allTrans.transactions[i].amount < 0) {
@@ -34,13 +40,15 @@ function generateGraph(type, labels, graphData) {
           '#9C27B0',
           '#00BCD4',
           '#FFEB3B'
-        ],
-        label: 'Amount: '
+        ]
       }],
       labels: labels
     },
     options: {
-      responsive: true
+      responsive: true,
+      legend: {
+        position: 'right'
+      }
     }
   };
   var ctx = document.getElementById("myChart").getContext("2d");

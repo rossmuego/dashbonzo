@@ -58,7 +58,15 @@
   </div>
   <div class="square">
     <h1>Breakdown</h1>
-    <canvas id="myChart"></canvas>
+    <div class="breakdown-menu">
+      <button onclick="changeType(this.id)" id="pie">Pie Chart</button>
+      <button onclick="changeType(this.id)" id="bar">Bar Chart</button>
+      <button onclick="changeType(this.id)" id="doughnut">Doughnut Chart</button>
+
+    </div>
+    <div class="breakdown-graph">
+      <canvas id="myChart"></canvas>
+    </div>
   </div>
   <div class="square">
     <div id="map"></div>

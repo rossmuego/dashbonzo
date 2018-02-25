@@ -45,11 +45,11 @@ function displayAllTrans(allTransactions) {
     singleTrans.id = allTransactions.transactions[i].id
     singleTrans.className = "transaction";
 
-      if (parseInt((allTransactions.transactions[i].amount)) < 0) {
-        singleTrans.style.backgroundColor = "#F44336";
-      } else {
-        singleTrans.style.backgroundColor = "#4CAF50";
-      }
+    if (parseInt((allTransactions.transactions[i].amount)) < 0) {
+      singleTrans.style.backgroundColor = "#F44336";
+    } else {
+      singleTrans.style.backgroundColor = "#4CAF50";
+    }
 
     if (allTransactions.transactions[i].amount < 0) {
       value = allTransactions.transactions[i].amount * -1
@@ -89,4 +89,9 @@ function loadAccountData(accounts, allTransactions) {
   document.getElementById('net-balance').innerHTML = "£" + (totalIn - totalOut) / 100;
   document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length - 1
 
+}
+
+function transactionPage() {
+  var transactions = getTransactions(getAccounts());
+  console.log(getAccounts())
 }
