@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/stylesheet.css">
+  <script type="text/javascript" src="js/layout.js"></script>
   <script type="text/javascript" src="js/maps.js"></script>
   <script type="text/javascript" src="js/monzo.js"></script>
   <script type="text/javascript" src="js/graph.js"></script>
@@ -17,14 +18,26 @@
 <body onload="init()">
   <div class="square">
     <h1>Account Overview</h1>
-    <h3>Name</h3>
-    <div id="account-name"></div>
-    <h3>Sort Code</h3>
-    <div id="sort-code"></div>
-    <h3>Account Number</h3>
-    <div id="account-number"></div>
-    <h3>Balance</h3>
-    <div id="account-balance"></div>
+    <div class="account-square-left">
+      <h3>Name</h3>
+      <div id="account-name"></div>
+      <h3>Sort Code</h3>
+      <div id="sort-code"></div>
+      <h3>Account Number</h3>
+      <div id="account-number"></div>
+      <h3>Balance</h3>
+      <div id="account-balance"></div>
+    </div>
+    <div class="account-square-right">
+      <h3>Total In</h3>
+      <div id="total-in"></div>
+      <h3>Total Out</h3>
+      <div id="total-out"></div>
+      <h3>NET Balance</h3>
+      <div id="net-balance"></div>
+      <h3>Total Transactions</h3>
+      <div id="total-transactions"></div>
+    </div>
   </div>
   <div class="square">
     <div class="square-header">

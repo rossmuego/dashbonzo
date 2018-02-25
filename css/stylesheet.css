@@ -111,3 +111,13 @@ h3 {
   overflow: scroll;
   height: 80%;
 }
+
+.account-square-left{
+  float: left;
+  width: 50%;
+}
+
+.account-square-right{
+  float: right;
+  width: 50%;
+}

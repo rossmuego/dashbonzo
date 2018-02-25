@@ -33,8 +33,7 @@ function generateGraph(type, labels, graphData) {
           '#2196F3',
           '#9C27B0',
           '#00BCD4',
-          '#FFEB3B',
-
+          '#FFEB3B'
         ],
         label: 'Amount: '
       }],
