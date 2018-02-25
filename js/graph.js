@@ -21,7 +21,6 @@ function loadChartData(allTrans, type) {
       }
     }
   }
-
   generateGraph(type, categories, transData)
 }
 

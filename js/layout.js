@@ -3,10 +3,12 @@ function init() {
     AccessToken = prompt("Enter Access Token");
     var accounts = getAccounts();
     var transactions = getTransactions(accounts);
+    var pots = getPots()
+
     loadChartData(transactions, "pie");
-    displayAllTrans(transactions)
+    displayAllTrans(transactions, pots)
     initMap(transactions)
-    loadAccountData(accounts, transactions)
+    loadAccountData(accounts, transactions, pots)
   } catch (e) {
     alert("Invalid Token")
     //location.reload()
@@ -14,8 +16,7 @@ function init() {
   }
 }
 
-function displayAllTrans(allTransactions) {
-  var pots = getPots()
+function displayAllTrans(allTransactions, pots) {
   var today = new Date(Date.now()).toISOString();
   today = today.slice(0, 10);
 
@@ -66,7 +67,7 @@ function displayAllTrans(allTransactions) {
   }
 }
 
-function loadAccountData(accounts, allTransactions) {
+function loadAccountData(accounts, allTransactions, pots) {
   var balance = getBalance(accounts);
   var totalIn = 0;
   var totalOut = 0;
@@ -89,9 +90,11 @@ function loadAccountData(accounts, allTransactions) {
   document.getElementById('net-balance').innerHTML = "£" + (totalIn - totalOut) / 100;
   document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length - 1
 
-}
+  for (var i = 0; i < pots.pots.length; i++) {
+    var potDesc = document.createElement('div')
+    potDesc.id = pots.pots[i].id
+    potDesc.innerHTML = "<h3>" + pots.pots[i].name + "</h3><div>£" + pots.pots[i].balance / 100 + "</div>"
+    document.getElementById('pots-list').appendChild(potDesc);
+  }
 
-function transactionPage() {
-  var transactions = getTransactions(getAccounts());
-  console.log(getAccounts())
 }

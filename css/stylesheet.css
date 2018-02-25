@@ -113,22 +113,28 @@ h3 {
   height: 80%;
 }
 
-.account-square-left{
+.account-square-left {
   float: left;
-  width: 50%;
+  width: 33%;
 }
 
-.account-square-right{
-  float: right;
-  width: 50%;
+.account-square-right {
+  float: left;
+  width: 33%;
+  overflow: scroll;
 }
 
-.breakdown-menu{
+.account-square-middle {
+  float: left;
+  width: 33%;
+}
+
+.breakdown-menu {
   float: left;
   width: 30%;
 }
 
-.breakdown-graph{
+.breakdown-graph {
   float: right;
   width: 70%;
 }
