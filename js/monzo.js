@@ -1,7 +1,7 @@
 var AccessToken;
 
 function getTransactions(accNum) {
-  return makeRequest("GET", "transactions?expand[]=merchant&account_id=", accNum.accounts[0].id)
+  return makeRequest("GET", "transactions?account_id=", accNum.accounts[0].id+"&expand[]=merchant")
 }
 
 function getAccounts() {

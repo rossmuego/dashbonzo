@@ -1,13 +1,20 @@
 var categories = [];
 var transData = [];
+var rawTransData;
+var balance;
 
 function changeType(graphType) {
   window.myPie.destroy();
-  generateGraph(graphType, categories, transData)
+  if (graphType == "line") {
+    lineChart(rawTransData)
+  } else {
+    generateGraph(graphType, categories, transData)
+  }
 }
 
-function loadChartData(allTrans, type) {
-
+function loadChartData(allTrans, type, initBalance) {
+  balance = initBalance.balance
+  rawTransData = allTrans;
   for (var i = 0; i < allTrans.transactions.length; i++) {
     if (categories.indexOf(allTrans.transactions[i].category) == -1 && allTrans.transactions[i].amount < 0) {
       categories.push(allTrans.transactions[i].category)
@@ -52,4 +59,52 @@ function generateGraph(type, labels, graphData) {
   };
   var ctx = document.getElementById("myChart").getContext("2d");
   window.myPie = new Chart(ctx, config);
+}
+
+function lineChart(transData) {
+  window.myPie.destroy()
+  var dates = [];
+  var balances = [];
+  var CurrBalance = balance
+  var today = new Date(Date.now()).toISOString();
+  today = today.slice(0, 10);
+
+  for (var i = 0; i < rawTransData.transactions.length; i++) {
+    if (dates.indexOf(rawTransData.transactions[i].created.slice(0, 10)) == -1) {
+      dates.push(rawTransData.transactions[i].created.slice(0, 10))
+      balances.push(0)
+    }
+  }
+
+  for (var i = rawTransData.transactions.length - 1; i >= 0; i--) {
+    for (var j = 0; j < dates.length; j++) {
+      if (rawTransData.transactions[i].created.slice(0, 10) == dates[j]) {
+        CurrBalance -= rawTransData.transactions[i].amount
+        balances[j] = CurrBalance / 100
+      }
+    }
+  }
+
+  var config = {
+    type: "line",
+    data: {
+      labels: dates,
+      datasets: [{
+        label: "Balance",
+        fill: false,
+        data: balances,
+        backgroundColor: '#F44336',
+        borderColor: '#F44336'
+      }]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'right'
+      }
+    }
+  };
+  var ctx = document.getElementById("myChart").getContext("2d");
+  window.myPie = new Chart(ctx, config);
+
 }

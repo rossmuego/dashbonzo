@@ -4,8 +4,7 @@ function init() {
     var accounts = getAccounts();
     var transactions = getTransactions(accounts);
     var pots = getPots()
-
-    loadChartData(transactions, "pie");
+    loadChartData(transactions, "pie", getBalance(accounts));
     displayAllTrans(transactions, pots)
     initMap(transactions)
     loadAccountData(accounts, transactions, pots)
@@ -90,11 +89,17 @@ function loadAccountData(accounts, allTransactions, pots) {
   document.getElementById('net-balance').innerHTML = "£" + (totalIn - totalOut) / 100;
   document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length - 1
 
-  for (var i = 0; i < pots.pots.length; i++) {
+  if (pots.pots.length == 0) {
     var potDesc = document.createElement('div')
-    potDesc.id = pots.pots[i].id
-    potDesc.innerHTML = "<h3>" + pots.pots[i].name + "</h3><div>£" + pots.pots[i].balance / 100 + "</div>"
+    potDesc.innerHTML = "<h3>No Pots</h3>"
     document.getElementById('pots-list').appendChild(potDesc);
+  } else {
+    for (var i = 0; i < pots.pots.length; i++) {
+      var potDesc = document.createElement('div')
+      potDesc.id = pots.pots[i].id
+      potDesc.innerHTML = "<h3>" + pots.pots[i].name + "</h3><div>£" + pots.pots[i].balance / 100 + "</div>"
+      document.getElementById('pots-list').appendChild(potDesc);
+    }
   }
 
 }
