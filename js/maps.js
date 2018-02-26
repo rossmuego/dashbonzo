@@ -4,7 +4,7 @@ function initMap(allTrans) {
   var currLon = -3.515625
 
   for (var i = 0; i < allTrans.transactions.length; i++) {
-    if (allTrans.transactions[i].merchant != null) {
+    if (allTrans.transactions[i].merchant != null && allTrans.transactions[i].merchant.online == false) {
       points.push(new google.maps.LatLng(allTrans.transactions[i].merchant.address.latitude, allTrans.transactions[i].merchant.address.longitude))
     }
   }

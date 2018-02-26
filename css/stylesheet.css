@@ -14,6 +14,10 @@ h3 {
   text-align: center;
 }
 
+.date-display h3 {
+  margin-bottom: 0px;
+}
+
 .square {
   width: 50%;
   padding: 1%;

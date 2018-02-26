@@ -29,20 +29,18 @@
       <div id="account-balance"></div>
     </div>
     <div class="account-square-middle">
+      <h3>Spend Today</h3>
+      <div id="spend-today"></div>
       <h3>Total In</h3>
       <div id="total-in"></div>
       <h3>Total Out</h3>
       <div id="total-out"></div>
-      <h3>NET Balance</h3>
-      <div id="net-balance"></div>
       <h3>Total Transactions</h3>
       <div id="total-transactions"></div>
     </div>
     <div class="account-square-right">
       <h2>Pots</h2>
-      <div id="pots-list">
-
-      </div>
+      <div id="pots-list"></div>
     </div>
   </div>
   <div class="square">
@@ -50,7 +48,12 @@
       <h1>Transactions</h1>
     </div>
     <div class="transaction-container-left">
-      <h3>Today</h3>
+      <div id="date-display" class="date-display">
+        <h3>Today</h3>
+        <button onclick="changeDay('back')">Previous</button>
+        <button onclick="changeDay('today')">Today</button>
+        <button onclick="changeDay('forward')">Next</button>
+      </div>
       <div class="transaction-left">
         <div id="transactions-today"></div>
       </div>

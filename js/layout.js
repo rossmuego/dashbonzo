@@ -1,9 +1,15 @@
+var accounts;
+var transactions;
+var pots;
+var today = new Date(Date.now()).toISOString();
+var dayBack = 0;
+
 function init() {
   try {
     AccessToken = prompt("Enter Access Token");
-    var accounts = getAccounts();
-    var transactions = getTransactions(accounts);
-    var pots = getPots()
+    accounts = getAccounts();
+    transactions = getTransactions(accounts);
+    pots = getPots()
     loadChartData(transactions, "pie", getBalance(accounts));
     displayAllTrans(transactions, pots)
     initMap(transactions)
@@ -15,10 +21,69 @@ function init() {
   }
 }
 
-function displayAllTrans(allTransactions, pots) {
-  var today = new Date(Date.now()).toISOString();
-  today = today.slice(0, 10);
+function changeDay(direction) {
+  if (direction == "back") {
+    dayBack++
+  } else if(direction == "forward") {
+    dayBack--
+  }else if(direction == "today") {
+    dayBack = 0
+  }
+  var myNode = document.getElementById("transactions-today");
+  while (myNode.firstChild) {
+    myNode.removeChild(myNode.firstChild);
+  }
+  var date = new Date()
+  date.setDate(date.getDate() - dayBack)
+  date = date.toISOString().slice(0, 10);
+  document.getElementById('date-display').innerHTML = "<h3>"+date+"</h3><button onclick="+"changeDay('back')"+">Previous</button><button onclick="+"changeDay('today')"+">Today</button><button onclick="+"changeDay('forward')"+'>Next</button>'+""
+  for (var i = 0; i < transactions.transactions.length; i++) {
+    if (transactions.transactions[i].created.slice(0, 10) == date) {
+      if (transactions.transactions[i].merchant == null) {
+        if ((transactions.transactions[i].description.slice(0, 4)) == "pot_") {
+          for (var j = 0; j < pots.pots.length; j++) {
+            if (pots.pots[j].id == transactions.transactions[i].description) {
+              merch = pots.pots[j].name
+              image = "img/bag-money.png"
+            }
+          }
+        } else {
+          merch = transactions.transactions[i].description;
+          image = "img/default-avatar.png"
+        }
+      } else {
+        merch = transactions.transactions[i].merchant.name;
+        if (transactions.transactions[i].merchant.logo == "") {
+          image = "img/default-trans.png"
+        } else {
+          image = transactions.transactions[i].merchant.logo;
+        }
+      }
 
+      var singleTrans = document.createElement('div')
+      singleTrans.id = transactions.transactions[i].id
+      singleTrans.className = "transaction";
+
+      if (parseInt((transactions.transactions[i].amount)) < 0) {
+        singleTrans.style.backgroundColor = "#F44336";
+      } else {
+        singleTrans.style.backgroundColor = "#4CAF50";
+      }
+
+      if (transactions.transactions[i].amount < 0) {
+        value = transactions.transactions[i].amount * -1
+      } else {
+        value = transactions.transactions[i].amount
+      }
+
+      singleTrans.innerHTML = "<img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>£' + value / 100 + "</div>"
+      document.getElementById('transactions-today').appendChild(singleTrans);
+    }
+  }
+}
+
+function displayAllTrans(allTransactions, pots) {
+  today = today.slice(0, 10)
   for (var i = allTransactions.transactions.length - 1; i >= 0; i--) {
     if (allTransactions.transactions[i].merchant == null) {
       if ((allTransactions.transactions[i].description.slice(0, 4)) == "pot_") {
@@ -86,7 +151,7 @@ function loadAccountData(accounts, allTransactions, pots) {
 
   document.getElementById('total-in').innerHTML = "£" + totalIn / 100;
   document.getElementById('total-out').innerHTML = "£" + totalOut / 100;
-  document.getElementById('net-balance').innerHTML = "£" + (totalIn - totalOut) / 100;
+  document.getElementById('spend-today').innerHTML = "£" + balance.spend_today / 100 * -1;
   document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length - 1
 
   if (pots.pots.length == 0) {
