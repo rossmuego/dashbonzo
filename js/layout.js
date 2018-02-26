@@ -24,9 +24,9 @@ function init() {
 function changeDay(direction) {
   if (direction == "back") {
     dayBack++
-  } else if(direction == "forward") {
+  } else if (direction == "forward") {
     dayBack--
-  }else if(direction == "today") {
+  } else if (direction == "today") {
     dayBack = 0
   }
   var myNode = document.getElementById("transactions-today");
@@ -36,7 +36,7 @@ function changeDay(direction) {
   var date = new Date()
   date.setDate(date.getDate() - dayBack)
   date = date.toISOString().slice(0, 10);
-  document.getElementById('date-display').innerHTML = "<h3>"+date+"</h3><button onclick="+"changeDay('back')"+">Previous</button><button onclick="+"changeDay('today')"+">Today</button><button onclick="+"changeDay('forward')"+'>Next</button>'+""
+  document.getElementById('date-display').innerHTML = "<h3>" + date + "</h3><button onclick=" + "changeDay('back')" + ">Previous</button><button onclick=" + "changeDay('today')" + ">Today</button><button onclick=" + "changeDay('forward')" + '>Next</button>' + ""
   for (var i = 0; i < transactions.transactions.length; i++) {
     if (transactions.transactions[i].created.slice(0, 10) == date) {
       if (transactions.transactions[i].merchant == null) {
@@ -123,10 +123,13 @@ function displayAllTrans(allTransactions, pots) {
     }
 
     singleTrans.innerHTML = "<img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>£' + value / 100 + "</div>"
-    document.getElementById('transactions-all').appendChild(singleTrans);
 
     if (allTransactions.transactions[i].created.slice(0, 10) == today) {
+      var dupNode = singleTrans.cloneNode(true);
       document.getElementById('transactions-today').appendChild(singleTrans);
+      document.getElementById('transactions-all').appendChild(dupNode);
+    } else {
+      document.getElementById('transactions-all').appendChild(singleTrans);
     }
   }
 }
