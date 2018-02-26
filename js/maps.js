@@ -14,7 +14,7 @@ function initMap(allTrans) {
   map = new google.maps.Map(document.getElementById('map'), {
     center: currLocation,
     zoom: 5,
-    mapTypeId: 'hybrid'
+    mapTypeId: 'roadmap'
   });
 
   var heatmap = new google.maps.visualization.HeatmapLayer({

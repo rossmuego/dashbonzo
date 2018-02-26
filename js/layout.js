@@ -10,7 +10,7 @@ function init() {
     accounts = getAccounts();
     transactions = getTransactions(accounts);
     pots = getPots()
-    loadChartData(transactions, "pie", getBalance(accounts));
+    loadChartData(transactions, "pie", getBalance(accounts), pots);
     displayAllTrans(transactions, pots)
     initMap(transactions)
     loadAccountData(accounts, transactions, pots)
@@ -37,7 +37,7 @@ function changeDay(direction) {
   date.setDate(date.getDate() - dayBack)
   date = date.toISOString().slice(0, 10);
   document.getElementById('date-display').innerHTML = "<h3>" + date + "</h3><button onclick=" + "changeDay('back')" + ">Previous</button><button onclick=" + "changeDay('today')" + ">Today</button><button onclick=" + "changeDay('forward')" + '>Next</button>' + ""
-  for (var i = 0; i < transactions.transactions.length; i++) {
+  for (var i = transactions.transactions.length -1; i >=0; i--) {
     if (transactions.transactions[i].created.slice(0, 10) == date) {
       if (transactions.transactions[i].merchant == null) {
         if ((transactions.transactions[i].description.slice(0, 4)) == "pot_") {
