@@ -11,22 +11,54 @@ var graphColours = [
   '#2196F3',
   '#9C27B0',
   '#00BCD4',
-  '#FFEB3B'
+  '#FFEB3B',
+  '#F44336',
+  '#4CAF50',
+  '#FF9800',
+  '#E91E63',
+  '#2196F3',
+  '#9C27B0',
+  '#00BCD4',
+  '#FFEB3B',
+  '#F44336',
+  '#4CAF50',
+  '#FF9800',
+  '#E91E63',
+  '#2196F3',
+  '#9C27B0',
+  '#00BCD4',
+  '#FFEB3B',
+  '#F44336',
+  '#4CAF50',
+  '#FF9800',
+  '#E91E63',
+  '#2196F3',
+  '#9C27B0',
+  '#00BCD4',
+  '#FFEB3B',
+  '#F44336',
+  '#4CAF50',
+  '#FF9800',
+  '#E91E63',
+  '#2196F3',
+  '#9C27B0',
+  '#00BCD4',
+  '#FFEB3B',
 ]
 
-function changeType(graphType) {
-  window.myPie.destroy();
-  if (graphType == "line") {
-    lineChart(rawTransData)
-  } else {
-    generateGraph(graphType, categories, transData)
+  function changeType(graphType) {
+    window.myPie.destroy();
+    if (graphType == "line") {
+      lineChart(rawTransData)
+    } else {
+      generateGraph(graphType, categories, transData)
+    }
   }
-}
 
 function loadChartData(allTrans, type, initBalance, initPots) {
   balance = initBalance.balance
   graphPots = initPots.pots;
-  rawTransData = allTrans;
+  rawTransData = allTrans
   for (var i = 0; i < allTrans.transactions.length; i++) {
     if (categories.indexOf(allTrans.transactions[i].category) == -1 && allTrans.transactions[i].amount < 0) {
       categories.push(allTrans.transactions[i].category)
@@ -112,7 +144,6 @@ function balanceHistory() {
 }
 
 function potHistory() {
-
   window.myPie.destroy()
   var dates = [];
   var balances = [];
@@ -133,7 +164,6 @@ function potHistory() {
   }
   for (var i = 0; i < balances.length; i++) {
     balances[i][dates.length - 1] = graphPots[i].balance / 100
-    console.log(balances)
   }
 
   for (var j = 0; j < graphPots.length; j++) {
@@ -176,4 +206,27 @@ function potHistory() {
   };
   var ctx = document.getElementById("myChart").getContext("2d");
   window.myPie = new Chart(ctx, config);
+}
+
+function merchantBreakdown() {
+  window.myPie.destroy()
+  var merchants = [];
+  var merchvalue = [];
+
+  for (var i = 0; i < rawTransData.transactions.length; i++) {
+    if (rawTransData.transactions[i].merchant != null) {
+      if (merchants.indexOf(rawTransData.transactions[i].merchant.name) == -1) {
+        merchants.push(rawTransData.transactions[i].merchant.name)
+        merchvalue.push(0)
+      }
+      if (merchants.indexOf(rawTransData.transactions[i].merchant.name) != -1 && rawTransData.transactions[i].include_in_spending == true) {
+        var value = rawTransData.transactions[i].amount
+        if (value < 0) {
+          value *= -1;
+          merchvalue[merchants.indexOf(rawTransData.transactions[i].merchant.name)] += (value / 100)
+        }
+      }
+    }
+  }
+  generateGraph("polarArea", merchants, merchvalue)
 }

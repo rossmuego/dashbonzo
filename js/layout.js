@@ -163,7 +163,7 @@ function loadAccountData(accounts, allTransactions, pots) {
   document.getElementById('total-in').innerHTML = "£" + totalIn / 100;
   document.getElementById('total-out').innerHTML = "£" + totalOut / 100;
   document.getElementById('spend-today').innerHTML = "£" + balance.spend_today / 100 * -1;
-  document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length - 1
+  document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length
 
   if (pots.pots.length == 0) {
     var potDesc = document.createElement('div')
