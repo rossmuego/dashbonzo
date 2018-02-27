@@ -37,7 +37,7 @@ function changeDay(direction) {
   date.setDate(date.getDate() - dayBack)
   date = date.toISOString().slice(0, 10);
   document.getElementById('date-display').innerHTML = "<h3>" + date + "</h3><button onclick=" + "changeDay('back')" + ">Previous</button><button onclick=" + "changeDay('today')" + ">Today</button><button onclick=" + "changeDay('forward')" + '>Next</button>' + ""
-  for (var i = transactions.transactions.length -1; i >=0; i--) {
+  for (var i = transactions.transactions.length - 1; i >= 0; i--) {
     if (transactions.transactions[i].created.slice(0, 10) == date) {
       if (transactions.transactions[i].merchant == null) {
         if ((transactions.transactions[i].description.slice(0, 4)) == "pot_") {
@@ -79,6 +79,10 @@ function changeDay(direction) {
       singleTrans.innerHTML = "<img class=" + 'transaction-image' + " src=" + image + " alt=" + 'trans_img' + "><div class=" + 'transaction-merch-name' + ">" + merch + "</div><div class=" + 'transaction-price>£' + value / 100 + "</div>"
       document.getElementById('transactions-today').appendChild(singleTrans);
     }
+  }
+  var node = document.getElementById("transactions-today")
+  if (!node.hasChildNodes()) {
+    node.innerHTML = "<br>No Transactions"
   }
 }
 
@@ -131,6 +135,10 @@ function displayAllTrans(allTransactions, pots) {
     } else {
       document.getElementById('transactions-all').appendChild(singleTrans);
     }
+  }
+  var node = document.getElementById("transactions-today")
+  if (!node.hasChildNodes()) {
+    node.innerHTML = "<br>No Transactions"
   }
 }
 

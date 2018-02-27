@@ -16,7 +16,6 @@ function changeType(graphType) {
 function loadChartData(allTrans, type, initBalance, initPots) {
   balance = initBalance.balance
   graphPots = initPots.pots;
-  console.log(graphPots)
   rawTransData = allTrans;
   for (var i = 0; i < allTrans.transactions.length; i++) {
     if (categories.indexOf(allTrans.transactions[i].category) == -1 && allTrans.transactions[i].amount < 0) {
@@ -134,7 +133,6 @@ function potHistory() {
       if (rawTransData.transactions[i].created.slice(0, 10) == dates[k]) {
         for (var j = 0; j < graphPots.length; j++) {
           if (graphPots[j].id == rawTransData.transactions[i].description) {
-            console.log(rawTransData.transactions[i].amount)
             CurrBalance += rawTransData.transactions[i].amount
             balances[k] = CurrBalance / 100
           }
