@@ -3,6 +3,16 @@ var transData = [];
 var rawTransData;
 var balance;
 var graphPots;
+var graphColours = [
+  '#F44336',
+  '#4CAF50',
+  '#FF9800',
+  '#E91E63',
+  '#2196F3',
+  '#9C27B0',
+  '#00BCD4',
+  '#FFEB3B'
+]
 
 function changeType(graphType) {
   window.myPie.destroy();
@@ -39,16 +49,7 @@ function generateGraph(type, labels, graphData) {
     data: {
       datasets: [{
         data: graphData,
-        backgroundColor: [
-          '#F44336',
-          '#4CAF50',
-          '#FF9800',
-          '#E91E63',
-          '#2196F3',
-          '#9C27B0',
-          '#00BCD4',
-          '#FFEB3B'
-        ]
+        backgroundColor: graphColours
       }],
       labels: labels
     },
@@ -115,43 +116,56 @@ function potHistory() {
   window.myPie.destroy()
   var dates = [];
   var balances = [];
-  var CurrBalance = graphPots[0].balance
+
   var today = new Date(Date.now()).toISOString().slice(0, 10);
 
   for (var i = 0; i < rawTransData.transactions.length; i++) {
     if (dates.indexOf(rawTransData.transactions[i].created.slice(0, 10)) == -1 && rawTransData.transactions[i].description.slice(0, 4) == "pot_") {
       dates.push(rawTransData.transactions[i].created.slice(0, 10))
-      balances.push(0)
     }
   }
 
-  dates.push(today);
-  balances.push(CurrBalance / 100)
+  for (var i = 0; i < graphPots.length; i++) {
+    balances.push([])
+    for (var j = 0; j < dates.length; j++) {
+      balances[i].push(0)
+    }
+  }
+  for (var i = 0; i < balances.length; i++) {
+    balances[i][dates.length - 1] = graphPots[i].balance / 100
+    console.log(balances)
+  }
 
-  for (var i = rawTransData.transactions.length - 1; i >= 0; i--) {
-    for (var k = 0; k < dates.length; k++) {
-      if (rawTransData.transactions[i].created.slice(0, 10) == dates[k]) {
-        for (var j = 0; j < graphPots.length; j++) {
+  for (var j = 0; j < graphPots.length; j++) {
+    var CurrBalance = graphPots[j].balance
+    for (var i = rawTransData.transactions.length - 1; i >= 0; i--) {
+      for (var k = 0; k < dates.length - 1; k++) {
+        if (rawTransData.transactions[i].created.slice(0, 10) == dates[k]) {
           if (graphPots[j].id == rawTransData.transactions[i].description) {
             CurrBalance += rawTransData.transactions[i].amount
-            balances[k] = CurrBalance / 100
+            balances[j][k] = CurrBalance / 100
           }
         }
       }
     }
   }
 
+  var data = [];
+  for (var i = 0; i < balances.length; i++) {
+    data.push({
+      data: balances[i],
+      label: graphPots[i].name,
+      fill: false,
+      backgroundColor: graphColours[i],
+      borderColor: graphColours[i]
+    })
+  }
+
   var config = {
     type: "line",
     data: {
       labels: dates,
-      datasets: [{
-        label: graphPots[0].name,
-        fill: false,
-        data: balances,
-        backgroundColor: '#FF9800',
-        borderColor: '#FF9800'
-      }]
+      datasets: data
     },
     options: {
       responsive: true,
