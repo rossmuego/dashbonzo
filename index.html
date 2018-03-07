@@ -19,28 +19,58 @@
   <div class="square">
     <h1>Account Overview</h1>
     <div class="account-square-left">
-      <h3>Name</h3>
-      <div id="account-name"></div>
-      <h3>Sort Code</h3>
-      <div id="sort-code"></div>
-      <h3>Account Number</h3>
-      <div id="account-number"></div>
-      <h3>Balance</h3>
-      <div id="account-balance"></div>
+      <div class="display-detail-card-beige">
+        <div class="display-card-header">
+          Name
+        </div>
+        <div class="display-card-content">
+          <div id="account-name"></div>
+        </div>
+      </div>
+      <div class="display-detail-card-beige">
+        <div class="display-card-header">
+          Sort Code
+        </div>
+        <div class="display-card-content">
+          <div id="sort-code"></div>
+        </div>
+      </div>
+      <div class="display-detail-card-beige">
+        <div class="display-card-header">
+          Account Number
+        </div>
+        <div class="display-card-content">
+          <div id="account-number"></div>
+        </div>
+      </div>
     </div>
     <div class="account-square-middle">
-      <h3>Spend Today</h3>
-      <div id="spend-today"></div>
-      <h3>Total In</h3>
-      <div id="total-in"></div>
-      <h3>Total Out</h3>
-      <div id="total-out"></div>
-      <h3>Total Transactions</h3>
-      <div id="total-transactions"></div>
+      <div class="display-detail-card-red">
+        <div class="display-card-header">
+          Balance
+        </div>
+        <div class="display-card-content">
+          <div id="account-balance"></div>
+        </div>
+      </div>
+      <div class="display-detail-card-red">
+        <div class="display-card-header">
+          Spent Today
+        </div>
+        <div class="display-card-content">
+          <div id="spend-today"></div>
+        </div>
+      </div>
+      <div class="display-detail-card-red">
+        <div class="display-card-header">
+          Total Transactions
+        </div>
+        <div class="display-card-content">
+          <div id="total-transactions"></div>
+        </div>
+      </div>
     </div>
-    <div class="account-square-right">
-      <h2>Pots</h2>
-      <div id="pots-list"></div>
+    <div class="account-square-right" id="pots-list">
     </div>
   </div>
   <div class="square">
@@ -49,17 +79,20 @@
     </div>
     <div class="transaction-container-left">
       <div id="date-display" class="date-display">
-        <h3>Today</h3>
-        <button onclick="changeDay('back')">Previous</button>
-        <button onclick="changeDay('today')">Today</button>
-        <button onclick="changeDay('forward')">Next</button>
+        <button class="previous-day" onclick="changeDay('back')">Previous</button>
+        <div class="transactions-header">
+          Today
+        </div>
+        <button class="next-day" onclick="changeDay('forward')">Next</button>
       </div>
       <div class="transaction-left">
         <div id="transactions-today"></div>
       </div>
     </div>
     <div class="transaction-container-right">
-      <h3>All</h3>
+      <div class="transactions-header">
+        All
+      </div>
       <div class="transaction-right">
         <div id="transactions-all"></div>
       </div>

@@ -36,7 +36,7 @@ function changeDay(direction) {
   var date = new Date()
   date.setDate(date.getDate() - dayBack)
   date = date.toISOString().slice(0, 10);
-  document.getElementById('date-display').innerHTML = "<h3>" + date + "</h3><button onclick=" + "changeDay('back')" + ">Previous</button><button onclick=" + "changeDay('today')" + ">Today</button><button onclick=" + "changeDay('forward')" + '>Next</button>' + ""
+  document.getElementById('date-display').innerHTML = "<button class="+'previous-day'+" onclick=" + "changeDay('back')" + ">Previous</button><div class="+'transactions-header'+">"+date+"</div><button class="+'next-day'+" onclick=" + "changeDay('forward')" + '>Next</button>' + ""
   for (var i = transactions.transactions.length - 1; i >= 0; i--) {
     if (transactions.transactions[i].created.slice(0, 10) == date) {
       if (transactions.transactions[i].merchant == null) {
@@ -65,9 +65,9 @@ function changeDay(direction) {
       singleTrans.className = "transaction";
 
       if (parseInt((transactions.transactions[i].amount)) < 0) {
-        singleTrans.style.backgroundColor = "#F44336";
+        singleTrans.style.backgroundColor = "rgb(236, 91, 92)";
       } else {
-        singleTrans.style.backgroundColor = "#4CAF50";
+        singleTrans.style.backgroundColor = "rgb(158, 185, 167)";
       }
 
       if (transactions.transactions[i].amount < 0) {
@@ -89,6 +89,7 @@ function changeDay(direction) {
 function displayAllTrans(allTransactions, pots) {
   today = today.slice(0, 10)
   for (var i = allTransactions.transactions.length - 1; i >= 0; i--) {
+
     if (allTransactions.transactions[i].merchant == null) {
       if ((allTransactions.transactions[i].description.slice(0, 4)) == "pot_") {
         for (var j = 0; j < pots.pots.length; j++) {
@@ -115,9 +116,9 @@ function displayAllTrans(allTransactions, pots) {
     singleTrans.className = "transaction";
 
     if (parseInt((allTransactions.transactions[i].amount)) < 0) {
-      singleTrans.style.backgroundColor = "#F44336";
+      singleTrans.style.backgroundColor = "rgb(236, 91, 92)";
     } else {
-      singleTrans.style.backgroundColor = "#4CAF50";
+      singleTrans.style.backgroundColor = "rgb(158, 185, 167)";
     }
 
     if (allTransactions.transactions[i].amount < 0) {
@@ -160,8 +161,6 @@ function loadAccountData(accounts, allTransactions, pots) {
     }
   }
 
-  document.getElementById('total-in').innerHTML = "£" + totalIn / 100;
-  document.getElementById('total-out').innerHTML = "£" + totalOut / 100;
   document.getElementById('spend-today').innerHTML = "£" + balance.spend_today / 100 * -1;
   document.getElementById('total-transactions').innerHTML = allTransactions.transactions.length
 
@@ -171,10 +170,13 @@ function loadAccountData(accounts, allTransactions, pots) {
     document.getElementById('pots-list').appendChild(potDesc);
   } else {
     for (var i = 0; i < pots.pots.length; i++) {
-      var potDesc = document.createElement('div')
-      potDesc.id = pots.pots[i].id
-      potDesc.innerHTML = "<h3>" + pots.pots[i].name + "</h3><div>£" + pots.pots[i].balance / 100 + "</div>"
-      document.getElementById('pots-list').appendChild(potDesc);
+      if (pots.pots[i].deleted == false) {
+        var potDesc = document.createElement('div')
+        potDesc.className = "display-detail-card-green";
+        potDesc.id = pots.pots[i].id
+        potDesc.innerHTML = "<div class="+'display-card-header'+">" + pots.pots[i].name + "</div><div class="+'display-card-content'+">£" + pots.pots[i].balance / 100 + "</div>"
+        document.getElementById('pots-list').appendChild(potDesc);
+      }
     }
   }
 

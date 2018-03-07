@@ -4,6 +4,7 @@ html, body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
   overflow: hidden;
+  color: rgb(245, 245, 245);
 }
 
 h1 {
@@ -19,10 +20,62 @@ h3 {
   margin-bottom: 0px;
 }
 
+.display-card-header {
+  font-size: 30px;
+  margin-bottom: 12%;
+}
+
+.display-card-content {
+  color: rgb(23, 35, 48);
+  font-size: 20px;
+}
+
+.display-detail-card-red {
+  border-radius: 5px;
+  background-color: rgb(236, 91, 92);
+  text-align: center;
+  padding: 5px;
+  height: 29%;
+  margin-bottom: 5px;
+  margin-left: 3px;
+  margin-right: 5px;
+  -webkit-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.62);
+  box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.62);
+}
+
+.display-detail-card-green {
+  border-radius: 5px;
+  background-color: rgb(158, 185, 167);
+  text-align: right;
+  padding: 5px;
+  height: 29%;
+  margin-bottom: 5px;
+  margin-left: 3px;
+  margin-right: 5px;
+  -webkit-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+  -moz-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+  box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+}
+
+.display-detail-card-beige {
+  border-radius: 5px;
+  background-color: rgb(227, 206, 162);
+  text-align: left;
+  padding: 5px;
+  height: 29%;
+  margin-bottom: 5px;
+  margin-left: 3px;
+  margin-right: 5px;
+  -webkit-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+  -moz-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+  box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+}
+
 .square {
   width: 50%;
   padding: 1%;
-  background-color: #f2f2f2;
+  background-color: rgb(23, 35, 48);
   float: left;
   height: 500px;
   text-align: center;
@@ -48,6 +101,9 @@ h3 {
   /* For Safari 3.1 to 6.0 */
   transition: height 0.5s;
   width: 100%;
+  -webkit-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+  -moz-box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
+  box-shadow: 1px 6px 12px 0px rgba(0, 0, 0, 0.37);
 }
 
 .transaction-extended {
@@ -96,7 +152,7 @@ h3 {
   float: left;
   overflow: scroll;
   width: 100%;
-  height: 80%;
+  height: 90%;
 }
 
 .transaction-container-left {
@@ -115,23 +171,26 @@ h3 {
   float: right;
   width: 100%;
   overflow: scroll;
-  height: 80%;
+  height: 90%;
 }
 
 .account-square-left {
   float: left;
   width: 33%;
+  height: 100%;
 }
 
 .account-square-right {
   float: left;
   width: 33%;
+  height: 100%;
   overflow: scroll;
 }
 
 .account-square-middle {
   float: left;
   width: 33%;
+  height: 100%;
 }
 
 .breakdown-menu {
@@ -146,4 +205,24 @@ h3 {
 .breakdown-graph {
   float: right;
   width: 85%;
+}
+
+.previous-day {
+  float: left;
+  width: 33%;
+  font-size: 20px;
+  border-radius: 3px;
+}
+
+.next-day {
+  float: right;
+  width: 33%;
+  font-size: 20px;
+  border-radius: 3px;
+}
+
+.transactions-header {
+  float: left;
+  width: 33%;
+  font-size: 20px;
 }

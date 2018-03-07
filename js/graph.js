@@ -46,14 +46,14 @@ var graphColours = [
   '#FFEB3B',
 ]
 
-  function changeType(graphType) {
-    window.myPie.destroy();
-    if (graphType == "line") {
-      lineChart(rawTransData)
-    } else {
-      generateGraph(graphType, categories, transData)
-    }
+function changeType(graphType) {
+  window.myPie.destroy();
+  if (graphType == "line") {
+    lineChart(rawTransData)
+  } else {
+    generateGraph(graphType, categories, transData)
   }
+}
 
 function loadChartData(allTrans, type, initBalance, initPots) {
   balance = initBalance.balance
@@ -144,6 +144,7 @@ function balanceHistory() {
 }
 
 function potHistory() {
+
   window.myPie.destroy()
   var dates = [];
   var balances = [];
@@ -164,6 +165,7 @@ function potHistory() {
   }
   for (var i = 0; i < balances.length; i++) {
     balances[i][dates.length - 1] = graphPots[i].balance / 100
+    console.log(balances)
   }
 
   for (var j = 0; j < graphPots.length; j++) {
@@ -174,6 +176,8 @@ function potHistory() {
           if (graphPots[j].id == rawTransData.transactions[i].description) {
             CurrBalance += rawTransData.transactions[i].amount
             balances[j][k] = CurrBalance / 100
+          }else {
+            balances[j][k] == CurrBalance;
           }
         }
       }
@@ -228,5 +232,7 @@ function merchantBreakdown() {
       }
     }
   }
-  generateGraph("polarArea", merchants, merchvalue)
+  console.log(merchvalue)
+  generateGraph("pie", merchants, merchvalue)
+
 }

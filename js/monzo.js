@@ -13,7 +13,7 @@ function getBalance(accNum) {
 }
 
 function getPots() {
-  return makeRequest("GET", "pots/listV1", "")
+  return makeRequest("GET", "pots", "")
 }
 
 function makeRequest(type, action, param) {
